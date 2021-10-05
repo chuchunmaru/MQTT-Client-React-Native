@@ -1,9 +1,39 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, TextInput, StatusBar, ScrollView } from 'react-native'
+import MQTT from 'react-native-mqtt-angelos3lex'
 
 const sendMessage = () => {
-  console.log('lixo')
+  
 }
+
+MQTT.createClient({
+  uri: 'mqtt://test.mosquitto.org:1883',
+  clientId: 'chuchunmaru:)'
+}).then(function(client) {
+
+  client.on('closed', function() {
+    console.log('mqtt.event.closed');
+  });
+
+  client.on('error', function(msg) {
+    console.log('mqtt.event.error', msg);
+  });
+
+  client.on('message', function(msg) {
+    console.log('mqtt.event.message', msg);
+    
+  });
+
+  client.on('connect', function() {
+    console.log('connected');
+    client.subscribe('chuchunmaru', 0);
+    client.publish('chuchunmaru', "teste message", 0, false);
+  });
+
+  client.connect();
+}).catch(function(err){
+  console.log(err);
+});
 
 export default class App extends React.Component {
 
