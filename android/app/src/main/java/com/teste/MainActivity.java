@@ -1,4 +1,4 @@
-package com.teste;
+package com.kashikuta;
 
 import com.facebook.react.ReactActivity;
 
@@ -11,6 +11,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "teste";
+    return "kashikuta";
   }
 }
